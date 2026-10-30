@@ -1,0 +1,107 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  display: flex; flex-direction: column;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  background: #d8d8d8; color: #222;
+}
+
+#titlebar {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 4px 10px; background: linear-gradient(#f4f4f4, #cfcfcf);
+  border-bottom: 1px solid #999;
+}
+#titlebar h1 { margin: 0; font-size: 20px; color: #555; letter-spacing: 1px; }
+#titlebar .notice { font-size: 12px; color: #b00; font-weight: bold; }
+
+#controls {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px;
+  padding: 3px 8px; font-size: 12px; background: #eef3f8; border-bottom: 1px solid #aab;
+}
+#controls label { white-space: nowrap; }
+#controls input[type=number] { width: 64px; font-size: 12px; }
+#controls select, #controls button { font-size: 12px; }
+#controls .sep { width: 1px; height: 18px; background: #aab; }
+#controls button.mode.on { background: #ffd84a; border: 1px solid #a80; }
+#controls button.primary { font-weight: bold; min-width: 56px; }
+
+#stage { flex: 1; display: flex; min-height: 0; }
+#mainWrap { position: relative; flex: 1; min-width: 0; }
+#mainMap { position: absolute; inset: 0; background: #aad3df; }
+#side { width: 34%; max-width: 520px; display: flex; flex-direction: column; border-left: 2px solid #555; }
+#zoomWrap { position: relative; flex: 1; border-bottom: 2px solid #555; }
+#zoomMap { position: absolute; inset: 0; }
+#zoomCity { position: absolute; z-index: 800; right: 6px; top: 6px; font-size: 12px; }
+#eewWrap { position: relative; flex: 1; }
+#eewMap { position: absolute; inset: 0; background: #48518f; }
+#eewLabel {
+  position: absolute; z-index: 800; left: 8px; top: 8px; padding: 2px 8px;
+  font-weight: bold; color: #fff; font-size: 14px;
+}
+#eewLabel.warn { background: #c00; }
+#eewLabel.fc { background: #d27a00; }
+
+#timer {
+  position: absolute; z-index: 800; left: 8px; top: 8px;
+  padding: 2px 10px; background: #fff; border: 1px solid #888;
+  font: 28px/1.2 "Consolas", "Courier New", monospace;
+}
+
+#infoPanel {
+  position: absolute; z-index: 800; left: 222px; right: auto; top: 8px;
+  width: min(460px, calc(100% - 280px)); max-height: 34%;
+  display: flex; flex-direction: column;
+  background: rgba(255, 255, 255, .95); border: 1px solid #888; font-size: 13px;
+}
+#infoPanel .tabs { display: flex; border-bottom: 1px solid #aaa; }
+#infoPanel .tabs button {
+  flex: 1; border: 0; padding: 4px; background: #e6e6e6; cursor: pointer; font-size: 12px;
+}
+#infoPanel .tabs button.active { background: #fff; font-weight: bold; }
+.tabbody { overflow: auto; padding: 6px 10px; }
+.tabbody.hidden { display: none; }
+.tabbody .head { font-weight: bold; font-size: 15px; padding: 3px 6px; color: #fff; margin-bottom: 4px; }
+.tabbody .head.warn { background: #c00; }
+.tabbody .head.fc { background: #d27a00; }
+.tabbody .head.info { background: #4b5bbf; }
+.tabbody .row { margin: 2px 0; }
+.tabbody .areas { line-height: 1.5; }
+.tabbody .lvl { display: flex; gap: 6px; align-items: flex-start; margin: 3px 0; }
+.tabbody .lvl img { height: 22px; }
+.tabbody .muted { color: #777; }
+
+#maxPanel {
+  position: absolute; z-index: 800; left: 8px; bottom: 74px; width: 200px;
+}
+#infoBar { position: absolute; z-index: 800; left: 8px; bottom: 8px; width: min(560px, calc(100% - 16px)); }
+#infoBar img { width: 100%; display: block; }
+#infoBar span {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  color: #fff; font-weight: bold; font-size: clamp(14px, 3.2vw, 26px); text-align: right;
+}
+#ibDay { left: 2%; width: 10%; }
+#ibHour { left: 17%; width: 9.5%; }
+#ibMin { left: 32%; width: 10.5%; }
+#ibMag { left: 72%; width: 22%; text-align: left !important; color: #ff0 !important; }
+.hidden { display: none !important; }
+
+#hint {
+  position: absolute; z-index: 800; right: 8px; bottom: 8px;
+  padding: 2px 8px; background: rgba(0, 0, 0, .6); color: #fff; font-size: 12px;
+}
+#hint:empty { display: none; }
+
+.int-icon img { width: 100%; height: 100%; display: block; }
+.epi-icon img { width: 100%; height: 100%; display: block; }
+
+#credits { padding: 2px 8px; font-size: 11px; background: #eee; border-top: 1px solid #aaa; color: #555; }
+#credits a { color: #346; }
+
+@media (max-width: 800px) {
+  #stage { flex-direction: column; }
+  #mainWrap { min-height: 60vh; }
+  #side { width: 100%; max-width: none; flex-direction: row; height: 32vh; border-left: 0; border-top: 2px solid #555; }
+  #zoomWrap { border-bottom: 0; border-right: 2px solid #555; }
+  #infoPanel { left: 8px; top: 52px; width: calc(100% - 16px); }
+  #maxPanel { width: 130px; }
+}
